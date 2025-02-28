@@ -1,2 +1,2 @@
-selenium==4.10.0  # Adjust based on your installed version
+selenium==4.29.0  # Adjust based on your installed version
 pandas==1.5.3  # Adjust based on your installed version
