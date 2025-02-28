@@ -42,11 +42,22 @@ def wait_for_captcha():
                 expected_conditions.presence_of_element_located((By.ID, "fo-captcha")))
     # while len(captcha_box.get_attribute("value")) < 6:
     #     time.sleep(10)
-    captcha_box.clear()
+    # correct_captcha = WebDriverWait(browser,30).until(
+    #         lambda browser: len(browser.find_element(By.ID, "fo-captcha").get_attribute("value")) >= 6)
+    # captcha_box.clear()
     captcha_box.send_keys()
-    correct_captcha = WebDriverWait(browser,30).until(
-        lambda browser: len(browser.find_element(By.ID, "fo-captcha").get_attribute("value")) >= 6)
+    start_time = time.time()
+    while True:
+        if len(captcha_box.get_attribute("value")) >= 6:
+            return
+        if time.time() - start_time > 29:
+            captcha_box.clear()
+            captcha_box.send_keys("123456")
+            return
+        time.sleep(0.5)       
     
+
+
 def submit_all():    
        
     wait_for_captcha()
